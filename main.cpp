@@ -17,12 +17,12 @@ void checkNewTcpdump(PacketsMonitor *Monitor) {
 
 
 
-void periodicSave(PacketsMonitor *Monitor, std::string filename) {
+void periodicSave(PacketsMonitor *Monitor, std::string filename, std::string user_name) {
     logMessage("INFO","Main::periodicSave -> Start Thread");
 
     while (true) {
         std::this_thread::sleep_for(std::chrono::minutes(1));
-        Monitor->saveToCSV(filename);
+        Monitor->saveToCSV(filename, user_name);
 
         logMessage("INFO","Main::periodicSave -> Saved Processed Traffic");
     }
@@ -90,10 +90,11 @@ void formatted_print(PacketsMonitor *Monitor){
 
 
 
-int main() {
+int main(int argc, char *argv[]) {
     PacketsMonitor Monitor;
     std::string total_bytes;
     std::unordered_map<std::string, packet>* packets_hashmap;
+    std::string user_name = argv[1];
 
     // Get previously saved traffic to accumulate on it
     Monitor.loadFromCSV("traffic_log");
@@ -102,7 +103,7 @@ int main() {
     std::thread check_new_tcpdump_data_thread(checkNewTcpdump, &Monitor);
 
     // Periodic save thread
-    std::thread save_thread(periodicSave, &Monitor, "traffic_log");
+    std::thread save_thread(periodicSave, &Monitor, "traffic_log", user_name);
 
     // Periodic delete thread
     std::thread delete_thread(periodicDelete, &Monitor);

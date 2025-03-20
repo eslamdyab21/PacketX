@@ -19,7 +19,7 @@ public:
     void checkNewTcpdumpDataThread();
     void processNewTcpdumpTsharkTotalBytes(std::string filePath);
     void processNewTcpdumpTsharkIPBytes(std::string filePath);
-    void saveToCSV(std::string base_dir);
+    void saveToCSV(std::string base_dir, std::string user_name);
     void loadFromCSV(std::string base_dir);
 
 

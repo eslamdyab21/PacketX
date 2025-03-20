@@ -133,7 +133,7 @@ void PacketsMonitor::processNewTcpdumpTsharkIPBytes(std::string filePath) {
 
 
 
-void PacketsMonitor::saveToCSV(std::string base_dir) {
+void PacketsMonitor::saveToCSV(std::string base_dir, std::string user_name) {
     logMessage("INFO","PacketsMonitor::saveToCSV");
     
     // Get current time
@@ -167,12 +167,13 @@ void PacketsMonitor::saveToCSV(std::string base_dir) {
 
     // Header
     if (!file_exists)
-        file << "Time Stamp,Source IP,Destination IP,KB Bandwidth,Total KB Bandwidth\n";
+        file << "User,Time Stamp,Source IP,Destination IP,KB Bandwidth,Total KB Bandwidth\n";
 
     
     // Data
     for (const auto& kv : packets_hashmap) {
-        file << timeStr << "," 
+        file << user_name << "," 
+             << timeStr << "," 
              << kv.second.source_ip << "," 
              << kv.second.destination_ip << ","
              << kv.second.total_k_bytes_bandwidth_for_ip << ","

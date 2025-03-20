@@ -45,7 +45,7 @@ sudo ./tcpdump_capture.sh wlp8s0 10
 
 - Run the `C++` program 
 ```bash
-./main
+./main user_name
 ```
 
 

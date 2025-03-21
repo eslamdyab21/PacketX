@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
     std::string user_name = argv[1];
 
     // Get previously saved traffic to accumulate on it
-    Monitor.loadFromCSV("traffic_log");
+    Monitor.loadFromCSV("traffic_log", user_name);
 
     // Check new tcpdump data thread
     std::thread check_new_tcpdump_data_thread(checkNewTcpdump, &Monitor);

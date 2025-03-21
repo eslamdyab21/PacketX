@@ -143,7 +143,7 @@ void PacketsMonitor::saveToCSV(std::string base_dir, std::string user_name) {
     std::strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M", std::localtime(&now));
     std::strftime(dateStr, sizeof(dateStr), "%Y-%m-%d", std::localtime(&now));
 
-    std::string filename = base_dir + "/" + dateStr + ".csv";
+    std::string filename = base_dir + "/" + user_name + "-" + dateStr + ".csv";
     
     // Create directory if it doesn’t exist
     try {
@@ -192,7 +192,7 @@ void PacketsMonitor::saveToCSV(std::string base_dir, std::string user_name) {
 
 
 
-void PacketsMonitor::loadFromCSV(std::string base_dir) {
+void PacketsMonitor::loadFromCSV(std::string base_dir, std::string user_name) {
     logMessage("INFO","PacketsMonitor::loadFromCSV");
 
     // Get current time
@@ -200,11 +200,12 @@ void PacketsMonitor::loadFromCSV(std::string base_dir) {
     std::time_t now = std::time(nullptr);
     std::strftime(dateStr, sizeof(dateStr), "%Y-%m-%d", std::localtime(&now));
 
-    std::string filename = base_dir + "/" + dateStr + ".csv";
+    std::string filename = base_dir + "/" + user_name + "-" + dateStr + ".csv";
 
     std::ifstream file(filename);
     bool firstLine = true;
     std::string line;
+    std::string temp;
 
 
     if (!file && !std::filesystem::exists(filename)) {
@@ -222,7 +223,8 @@ void PacketsMonitor::loadFromCSV(std::string base_dir) {
         packet p;
         std::string bandwidth, total_bandwidth;
 
-        std::getline(iss, p.source_ip, ','); // skip timestamp
+        std::getline(iss, temp, ','); // skip user
+        std::getline(iss, temp, ','); // skip timestamp
         std::getline(iss, p.source_ip, ',');
         std::getline(iss, p.destination_ip, ',');
         std::getline(iss, bandwidth, ',');

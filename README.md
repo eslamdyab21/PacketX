@@ -10,7 +10,11 @@ PacketX is a **lightweight high-performance software** for real-time capturing a
 ✅ **Analyze Bandwidth Usage** with `tshark` and `c++` to break down traffic.  
 ✅ **Identify High Data Usage Apps** by inspecting UDP/TCP connections.  
 ✅ **Real Time Traffic Monitoring** with `bash` and `c++`.   
-✅ **Save Analyzed Captured State**.   
+✅ **Save Analyzed Captured State**.  
+✅ **Modern AWS** `S3-Iceberg Lakehouse` With `Redshift` and `DynamoDB`.   
+
+![](images/diagram-export-4-1-2025-7_18_17-PM.png)
+The related Lakehouse source code and documentation can be found in this repo ([PacketX-Lakehouse](https://github.com/eslamdyab21/PacketX-Lakehouse))
 
 <br/>
 
